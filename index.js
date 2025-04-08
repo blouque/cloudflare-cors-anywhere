@@ -95,9 +95,9 @@ addEventListener("fetch", async event => {
                 });
 
                 const response = await fetch(targetUrl, newRequest);
-                const responseHeaders = new Headers(response.headers);
-                const exposedHeaders = [];
-                const allResponseHeaders = {};
+                let responseHeaders = new Headers(response.headers);
+                let exposedHeaders = [];
+                let allResponseHeaders = {};
                 for (const [key, value] of response.headers.entries()) {
                     exposedHeaders.push(key);
                     allResponseHeaders[key] = value;
