@@ -68,6 +68,7 @@ addEventListener("fetch", async event => {
             if (customHeaders !== null) {
                 try {
                     customHeaders = JSON.parse(customHeaders);
+                    console.log({targetUrl: targetUrl, customHeaders: customHeaders});
                 } catch (e) {}
             }
 
@@ -95,6 +96,7 @@ addEventListener("fetch", async event => {
                 });
 
                 const response = await fetch(targetUrl, newRequest);
+                console.log({targetUrl: targetUrl, response: response});
                 let responseHeaders = new Headers(response.headers);
                 let exposedHeaders = [];
                 let allResponseHeaders = {};
@@ -107,9 +109,13 @@ addEventListener("fetch", async event => {
 
                 responseHeaders.set("Access-Control-Expose-Headers", exposedHeaders.join(","));
                 responseHeaders.set("cors-received-headers", JSON.stringify(allResponseHeaders));
-                responseHeaders.set("x-request-url", response.url);
+                responseHeaders.set("x-request-url", targetUrl);
+                responseHeaders.set("x-final-url", response.url);
+                console.log({targetUrl: targetUrl, responseHeaders: responseHeaders});
 
                 const responseBody = isPreflightRequest ? null : await response.arrayBuffer();
+
+                
 
                 const responseInit = {
                     headers: responseHeaders,
