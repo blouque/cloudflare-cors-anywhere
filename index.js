@@ -107,6 +107,7 @@ addEventListener("fetch", async event => {
 
                 responseHeaders.set("Access-Control-Expose-Headers", exposedHeaders.join(","));
                 responseHeaders.set("cors-received-headers", JSON.stringify(allResponseHeaders));
+                responseHeaders.set("x-request-url", response.url);
 
                 const responseBody = isPreflightRequest ? null : await response.arrayBuffer();
 
