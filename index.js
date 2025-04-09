@@ -91,7 +91,6 @@ addEventListener("fetch", async event => {
                 }
 
                 const newRequest = new Request(event.request, {
-                    redirect: "follow",
                     headers: filteredHeaders
                 });
 
